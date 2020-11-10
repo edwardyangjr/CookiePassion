@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2020 at 10:14 AM
+-- Generation Time: Nov 10, 2020 at 12:55 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -41,7 +41,9 @@ CREATE TABLE `cookie` (
 --
 
 INSERT INTO `cookie` (`name`, `description`, `price`, `inventory`, `ingredients`, `del`) VALUES
-('CHOCOLATE CHIP', 'Signature chocolate chip.', '1.50', 100, 'Chocolate', 1);
+('Banana Pudding Cookie', 'Cookie made from Banana Pudding.', '2.00', 150, 'Cookies and Banana.', 1),
+('Chocolate Chip Cookie', 'Signature chocolate chip.', '1.50', 100, 'Chocolate', 1),
+('Cookies and Cream Cookie', 'Cookie made from Cookies and Cream.', '2.00', 150, 'Cookies and Cream.', 1);
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,7 @@ CREATE TABLE `orderdetail` (
 --
 
 INSERT INTO `orderdetail` (`id`, `orderId`, `cookieName`, `amount`, `del`) VALUES
-(1, 1, 'CHOCOLATE CHIP', 2, 1);
+(3, 1, 'Chocolate Chip Cookie', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +86,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `email`, `name`, `password`, `privilege`, `del`) VALUES
-('admin', 'admin@admin.com', 'admin', 'admin', 'admin', 1);
+('admin', 'admin@admin.com', 'admin', 'admin', 'admin', 1),
+('user', 'user@user.com', 'user', 'user', 'user', 1);
 
 -- --------------------------------------------------------
 
@@ -146,7 +149,7 @@ ALTER TABLE `userorder`
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `userorder`
