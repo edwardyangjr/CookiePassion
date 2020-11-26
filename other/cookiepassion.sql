@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2020 at 12:55 AM
+-- Generation Time: Nov 26, 2020 at 01:24 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -33,6 +33,7 @@ CREATE TABLE `cookie` (
   `price` varchar(50) NOT NULL DEFAULT '0.00',
   `inventory` int(11) NOT NULL DEFAULT 0,
   `ingredients` text DEFAULT NULL,
+  `imageLocation` varchar(100) NOT NULL,
   `del` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,10 +41,22 @@ CREATE TABLE `cookie` (
 -- Dumping data for table `cookie`
 --
 
-INSERT INTO `cookie` (`name`, `description`, `price`, `inventory`, `ingredients`, `del`) VALUES
-('Banana Pudding Cookie', 'Cookie made from Banana Pudding.', '2.00', 150, 'Cookies and Banana.', 1),
-('Chocolate Chip Cookie', 'Signature chocolate chip.', '1.50', 100, 'Chocolate', 1),
-('Cookies and Cream Cookie', 'Cookie made from Cookies and Cream.', '2.00', 150, 'Cookies and Cream.', 1);
+INSERT INTO `cookie` (`name`, `description`, `price`, `inventory`, `ingredients`, `imageLocation`, `del`) VALUES
+('Biscuit', NULL, '1.60', 50, NULL, 'Images/biscuit.png', 1),
+('Caramel Chocolate Pecan Cookie', NULL, '1.99', 0, NULL, 'images/CaramelChocolatePecanCookie.png', 1),
+('Chocolate Chip / Peanut Butter', NULL, '1.59', 100, NULL, 'Images/chocolate_chip_peanut_butter_cookie.png', 1),
+('Chocolate Chip Cookie', 'Signature chocolate chip.', '1.50', 100, 'Chocolate', 'images/floating_chocolate_chip_cookies.png', 1),
+('Chocolate Chocolate Chip', NULL, '1.80', 100, NULL, 'images/ChocolateChocolateChip.png', 1),
+('Cookies N Cream', 'Made with Oreo.', '2.60', 100, 'Cream', 'images/CookiesNCream.png', 1),
+('Iced Sugar Cookie', 'Normal sugar cookie.', '1.20', 100, NULL, 'images/IcedSugarCookie.png', 1),
+('Jam Cookie', NULL, '2.10', 100, NULL, 'images/CaramelApple.png', 1),
+('Jelly Cookie', NULL, '3.30', 100, NULL, 'images/Jelly.png', 1),
+('Kisses Cookie', NULL, '5.50', 100, NULL, 'images/KissesCookie.png', 1),
+('Matcha Green Tea', NULL, '2.50', 100, NULL, 'images/MatchaGreenTea.png', 1),
+('Oatmeal Raisin', NULL, '1.79', 100, NULL, 'images/OatmealRaisin.png', 1),
+('Red Velvet Cookie', NULL, '3.50', 100, NULL, 'images/RedVelvet.png', 1),
+('Smores Cookie', NULL, '4.50', 100, NULL, 'images/Smores.png', 1),
+('Sugar Cookie', NULL, '0.99', 100, NULL, 'images/SugarCookie.png', 1);
 
 -- --------------------------------------------------------
 
