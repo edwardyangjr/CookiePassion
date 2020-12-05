@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2020 at 05:53 AM
+-- Generation Time: Dec 05, 2020 at 06:17 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -43,7 +43,7 @@ CREATE TABLE `cookie` (
 --
 
 INSERT INTO `cookie` (`id`, `name`, `description`, `price`, `inventory`, `ingredients`, `imageLocation`, `del`) VALUES
-(1, 'Biscuit', 'Good', '1.61', 51, 'coco', 'images/cookies/biscuit.png', 1),
+(1, 'Biscuit', 'Good', '1.61', 51, 'coco', 'images/cookies/cookieNewUpload.png', 1),
 (2, 'Caramel Chocolate Pecan Cookie', NULL, '1.99', 0, NULL, 'images/cookies/CaramelChocolatePecanCookie.png', 1),
 (3, 'Chocolate Chip / Peanut Butter', NULL, '1.59', 100, NULL, 'images/cookies/chocolate_chip_peanut_butter_cookie.png', 1),
 (4, 'Chocolate Chip Cookie', 'Signature chocolate chip.', '1.50', 100, 'Chocolate', 'images/cookies/floating_chocolate_chip_cookies.png', 1),
@@ -81,7 +81,15 @@ CREATE TABLE `orderdetail` (
 --
 
 INSERT INTO `orderdetail` (`id`, `orderId`, `cookieID`, `amount`, `del`) VALUES
-(3, 1, 4, 1, 1);
+(9, 16, 1, 1, 1),
+(10, 16, 4, 5, 1),
+(11, 16, 6, 1, 1),
+(12, 17, 11, 5, 1),
+(13, 17, 12, 1, 1),
+(14, 17, 13, 5, 1),
+(15, 17, 15, 1, 1),
+(16, 18, 3, 1, 1),
+(17, 18, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -103,7 +111,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`username`, `email`, `password`, `privilege`, `del`) VALUES
 ('admin', 'admin@admin.com', 'admin', 'admin', 1),
+('test1234', 'sadaasd@das.com', '$2y$10$1paCT7El/JVBVgKHMrg4reP12QeDJ1/xqC/CBWqWswaUETl2EDVVq', 'user', 1),
 ('tested', 'tested@gmail.com', '$2y$10$8zGKYUIW.cFuh30CMLOqfeXG6D5OQWolp15WTcOdXbesysdc5JMh6', 'user', 1),
+('testNew', 'edfasd@das.com', '$2y$10$2W4ZbvfF33k5NxIeiAvUluHa3JQAWSc.vYDthelgjzTI5hBLm37ZS', 'user', 1),
 ('user', 'user@user.com', 'user', 'user', 1);
 
 -- --------------------------------------------------------
@@ -125,7 +135,9 @@ CREATE TABLE `userorder` (
 --
 
 INSERT INTO `userorder` (`username`, `orderId`, `total`, `orderTime`, `del`) VALUES
-('admin', 1, '1.50', '2020-11-05 15:10:31', 1);
+('admin', 16, '11.71', '2020-12-05 03:05:04', 1),
+('admin', 17, '32.78', '2020-12-05 04:44:19', 1),
+('admin', 18, '3.09', '2020-12-05 05:14:10', 1);
 
 --
 -- Indexes for dumped tables
@@ -172,13 +184,13 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `userorder`
 --
 ALTER TABLE `userorder`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
