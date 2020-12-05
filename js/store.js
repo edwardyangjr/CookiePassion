@@ -5,6 +5,9 @@ if (document.readyState == 'loading') {
 }
 
 function ready() {
+
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+    cartItemContainer.innerHTML = $.cookie('cartStored')
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (var i = 0; i < removeCartItemButtons.length; i++) {
         var button = removeCartItemButtons[i]
@@ -114,6 +117,7 @@ function addItemToCart(title, price, imageSrc, cookieId) {
 function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    var cartString = ""
     var total = 0
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow = cartRows[i]
@@ -122,7 +126,9 @@ function updateCartTotal() {
         var price = parseFloat(priceElement.innerText.replace('$', ''))
         var quantity = quantityElement.value
         total = total + (price * quantity)
+        cartString += "<div class='cart-row'>" + cartRows[i].innerHTML + "</div>"
     }
+    $.cookie('cartStored', cartString)
     total = Math.round(total * 100) / 100
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
