@@ -1,5 +1,8 @@
 <?php
 require("lib/getProjectBrowse.php");
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $cookieList = getAllCookie();
 ?>
 
@@ -25,12 +28,32 @@ $cookieList = getAllCookie();
     <section class="container content-section">
         <h2 class="section-header">COOKIES</h2>
         <br />
-        <button class='btn btn-primary shop-item-edit-button btn-center' type='button' data-id='new'>Add New Cookie</button>
+        <?php
+        if (isset($_SESSION["privilege"])) {
+            if($_SESSION["privilege"] == "admin") {
+                echo "<button class='btn btn-primary shop-item-edit-button btn-center' type='button' data-id='new'>Add New Cookie</button>";
+                echo "<br/>";
+                echo '<form action="lib/uploadImage.php" method="post" enctype="multipart/form-data" class="md-form">';
+                echo '<div class="custom-file">
+                    <input type="file" class="custom-file-input" name="fileToUpload" id="fileToUpload">
+                    <label class="custom-file-label" for="fileToUpload">Upload New Image</label>
+                    </div>';
+                echo '<button type="submit" class="btn btn-primary btn-center2">Upload New Image</button>';
+                echo '</form>';
+            }
+
+            if (isset($_SESSION['newImageLocation']))
+            {
+                echo "<script> alert('Uploaded at: ", $_SESSION['newImageLocation'], "');</script>";
+                $_SESSION['newImageLocation'] = null;
+            }
+        }
+        ?>
         <div class="shop-items">
             <?php
             foreach ($cookieList as $cookie) {
                 echo "<div class='shop-item' id=", $cookie['id'], ">";
-                echo "<span class='shop-item-title'>", $cookie['name'], "</span>";
+                echo "<span class='shop-item-title' id=", $cookie['id'], ">", $cookie['name'], "</span>";
                 echo "<img class='shop-item-image' src=", $cookie['imageLocation'], ">";
                 echo "<div class='shop-item-details'>";
                 echo "<span class='shop-item-price'>$", $cookie['price'], "</span>";
@@ -42,15 +65,19 @@ $cookieList = getAllCookie();
                 if ($cookie['ingredients']) {
                     echo "<p>", "Contain: ", $cookie['ingredients'], "</p>";
                 }
-                echo "<button class='btn btn-primary shop-item-edit-button' type='button'
-                    data-id='", $cookie['id'], "',
-                    data-name='", $cookie['name'], "',
-                    data-description='", $cookie['description'], "',
-                    data-price='", $cookie['price'], "',
-                    data-inventory='", $cookie['inventory'], "',
-                    data-ingredients='", $cookie['ingredients'], "',
-                    data-imageLocation='", $cookie['imageLocation'], "',
-                    data-del='", $cookie['del'], "'>EDIT</button>";
+                if (isset($_SESSION["privilege"])) {
+                    if($_SESSION["privilege"] == "admin") {
+                        echo "<button class='btn btn-primary shop-item-edit-button' type='button'
+                            data-id='", $cookie['id'], "',
+                            data-name='", $cookie['name'], "',
+                            data-description='", $cookie['description'], "',
+                            data-price='", $cookie['price'], "',
+                            data-inventory='", $cookie['inventory'], "',
+                            data-ingredients='", $cookie['ingredients'], "',
+                            data-imageLocation='", $cookie['imageLocation'], "',
+                            data-del='", $cookie['del'], "'>EDIT</button>";
+                    }
+                }
                 echo "</div>";
             }
             ?>
@@ -88,6 +115,7 @@ $cookieList = getAllCookie();
                                 <div class="form-group">
                                     <label for="imageLocation-text" class="col-form-label">Image Location:</label>
                                     <input type="text" class="form-control" id="imageLocation-text">
+                                    <spam>Format "images/cookies/" + image name.</spam>
                                 </div>
                                 <div class="form-group">
                                     <label for="del-num" class="col-form-label">Del:</label>
@@ -142,6 +170,10 @@ $cookieList = getAllCookie();
             <span class="cart-total-price">$0</span>
         </div>
         <!-- TODO: clicking puchase will display notif. need new page to make payment -->
+        <?php
+        if (isset($_SESSION["privilege"]) && isset($_SESSION["userName"]) && isset($_SESSION["privilege"])) {
+        }
+        ?>
         <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
     </section>
 

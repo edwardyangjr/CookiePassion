@@ -1,12 +1,11 @@
-<?php  
-
+<?php
 $name =$_POST['uname'];
 $email =$_POST['Email'];
 $psw =$_POST['psw'];
 
 
 session_start();
-setUser(false, "");
+setUser(false, "", "none");
 
 
 $servername = "localhost";
@@ -50,18 +49,18 @@ function isFromLogin($conn, $name, $psw){
 	$dbPsw = $row["password"];
 
 	if($dbPsw == ""){
-		setUser(false, "");
+		setUser(false, "", "none");
 		echo "User Not Registered.";
 		$conn->close();
 		return;
 	}
 
 	if(password_verify($psw , $dbPsw)||($psw == $dbPsw)){
-		setUser(true, $name);
+		setUser(true, $name, $row["privilege"]);
 		echo "success";
 	}
 	else if($psw != $dbPsw){
-		setUser(false, "");
+		setUser(false, "", "none");
 		echo "Password Incorrect.";
 
 	}
@@ -89,11 +88,11 @@ function isFromRegister($conn, $name, $psw, $email){
 		$sql="INSERT INTO user (username,email,password) Values ('$name', '$email', '$hashed_password')";
 		
 		if ($conn->query($sql) === TRUE) {
-		  setUser(true, $name);
+		  setUser(true, $name, "user");
 		  echo "success";
 		  
 		} else {
-		  setUser(false, "");
+		  setUser(false, "", "none");
 		  echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	}
@@ -102,13 +101,15 @@ function isFromRegister($conn, $name, $psw, $email){
 }
 
 
-function setUser($isUser, $name) {
-		$_SESSION["userName"] = $name;
-	  if($isUser){
-	  	  $_SESSION["isMember"] = true;
-	  }else{
-	  	  $_SESSION["isMember"] = false;
-	  }
+function setUser($isUser, $name, $privilege) {
+	$_SESSION["userName"] = $name;
+	$_SESSION["privilege"] = "none";
+	if($isUser){
+		$_SESSION["isMember"] = true;
+		$_SESSION["privilege"] = $privilege;
+	}else{
+		$_SESSION["isMember"] = false;
+	}
 }
 
 

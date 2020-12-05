@@ -3,6 +3,9 @@
 DEFINE('DB_USER', 'root');
 DEFINE('DB_PASSWORD', '');
 DEFINE('DSN', 'mysql:host=localhost;dbname=cookiepassion');
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 function getAllCookie() {
     try {
@@ -53,6 +56,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $statement->bindValue(':del', $_POST['del']);
         $statement->bindValue(':id', $_POST['id']);
         $statement->execute();
+    }
+    else if ($_POST['action'] == "purchase"){
+        $query = 'INSERT INTO userorder (username, total) VALUES (:username, :total);';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':username', $_SESSION["userName"]);
+        $statement->bindValue(':total', $_POST['totalPost']);
+        $statement->execute();
+
+        $query = 'SELECT LAST_INSERT_ID();';
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $lastID = $statement->fetch();
+        
+        foreach ($_POST['cookies'] as $cookie) {
+            $query = 'INSERT INTO orderdetail (orderid, cookieID, amount) VALUES (:orderid, :cookieID, :amount);';
+            $statement = $db->prepare($query);
+            $statement->bindValue(':orderid', $lastID[0]);
+            $statement->bindValue(':cookieID', $cookie["cookieID"]);
+            $statement->bindValue(':amount', $cookie['amount']);
+            $statement->execute();
+        }
     }
   }
 

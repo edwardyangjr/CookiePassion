@@ -347,3 +347,9 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.btn-center2 {
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, 50%);
+}
