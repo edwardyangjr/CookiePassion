@@ -14,7 +14,8 @@ $cookieList = getAllCookie();
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="js/store.js" async></script>
+    <script src="js/store_test.js" async></script>
+    <!-- <script src="js/store.js" async></script> -->
     <script src="js/edit.js" async></script>
 </head>
 
@@ -23,24 +24,25 @@ $cookieList = getAllCookie();
     include("headerNavbar.html");
     ?>
 
-    <form action="" method="post">
-		<input type="text" name="search" />
-		<input type="submit" value="Search" />
-	</form>
- <!--
- 
-    <select id="search2" name="filter_price" placeholder="Price">
-					<option value="<$1"<?=$data2 == '<$1' ? ' selected="selected"' : '';?>><$1</option>
-					<option value="$1-$5"<?=$data2=='$1-$5' ? ' selected="selected"' : '';?>>$1-$5</option>
-					<option value=">$5"<?=$data2=='>$5' ? ' selected="selected"' : '';?>>>$5</option>
-				</select>
-
-                
-    
-       
-	    <input type="submit" id="submit" value="Search" name="searchsubmit"> 
-        -->
+    <!-- keyword search and price range filter -->
+    <form action="#" method="post">
+        <input id="search1" type="text" name="search" />
         
+        <select id="search2" name="filter_price" placeholder="price">
+            
+            <option value=""></option> <!-- default empty -->
+            <option value="1"><$1</option>
+					<option value="2">$1-$5</option>
+					<option value="3">$5</option>
+        </select>
+
+		<input type="submit" id="submit" value="Search" name="searchsubmit"> <!-- submit button -->
+	</form>
+ 
+        
+
+
+
         <table> 
     <tr> 
     <td  class="container browse-section">
