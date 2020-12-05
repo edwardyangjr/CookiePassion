@@ -60,7 +60,7 @@ body {
     padding-bottom: 30px;
 }
 
-.band-name {
+.shop-name {
     text-align: center;
     margin: 0;
     font-size: 4em;
@@ -69,22 +69,30 @@ body {
     color: white;
 }
 
-.band-name-large {
+.shop-name-large {
     font-size: 8em;
 }
 
-.content-section {
+.browse-section {
     margin: 1em;
+    width: 75%;
+}
+
+
+.cart-section {
+    margin: 1em;
+    width: 25%;
+    vertical-align: text-top;
 }
 
 .container {
-    max-width: 900px;
+    /*max-width: 900px;*/
     margin: 0 auto;
     padding: 0 1.5em;
 }
 
 .section-header {
-    font-family: "Metal Mania";
+    font-family: "Verdana";
     font-weight: normal;
     color: #333;
     text-align: center;
@@ -237,6 +245,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    /* width: 75%; */
 }
 
 .cart-header {
