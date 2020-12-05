@@ -22,7 +22,28 @@ $cookieList = getAllCookie();
     <?php
     include("headerNavbar.html");
     ?>
-    <section class="container content-section">
+
+    <form action="" method="post">
+		<input type="text" name="search" />
+		<input type="submit" value="Search" />
+	</form>
+ <!--
+ 
+    <select id="search2" name="filter_price" placeholder="Price">
+					<option value="<$1"<?=$data2 == '<$1' ? ' selected="selected"' : '';?>><$1</option>
+					<option value="$1-$5"<?=$data2=='$1-$5' ? ' selected="selected"' : '';?>>$1-$5</option>
+					<option value=">$5"<?=$data2=='>$5' ? ' selected="selected"' : '';?>>>$5</option>
+				</select>
+
+                
+    
+       
+	    <input type="submit" id="submit" value="Search" name="searchsubmit"> 
+        -->
+        
+        <table> 
+    <tr> 
+    <td  class="container browse-section">
         <h2 class="section-header">COOKIES</h2>
         <br />
         <button class='btn btn-primary shop-item-edit-button btn-center' type='button' data-id='new'>Add New Cookie</button>
@@ -104,31 +125,10 @@ $cookieList = getAllCookie();
                 </div>
             </div>
         </div>
-    </section>
-    <!--<section class="container content-section">
-        <h2 class="section-header">COMBOS</h2>
-        <div class="shop-items">
-            <div class="shop-item">
-                <span class="shop-item-title">Assorted Cookies (10 pieces)</span>
-                <img class="shop-item-image" src="Images/assorted_cookies_line.png">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$19.99</span>
-                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <span class="shop-item-title">Chocolate Chip Cookies Pack (5 pieces)</span>
-                <img class="shop-item-image" src="Images/stacked_chocolate_chip_cookies.png">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$6.99</span>
-                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                </div>
-            </div>
-        </div>
-    </section>-->
+    </td >
 
     <!-- responsive cart with js -->
-    <section class="container content-section">
+    <td  class="container cart-section">
         <h2 class="section-header">CART</h2>
         <div class="cart-row">
             <span class="cart-item cart-header cart-column">ITEM</span>
@@ -143,32 +143,10 @@ $cookieList = getAllCookie();
         </div>
         <!-- TODO: clicking puchase will display notif. need new page to make payment -->
         <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
-    </section>
+    </td >
 
-
-    <!--
-        <footer class="main-footer">
-            <div class="container main-footer-container">
-                <h3 class="band-name">The Generics</h3>
-                <ul class="nav footer-nav">
-                    <li>
-                        <a href="https://www.youtube.com" target="_blank">
-                            <img src="Images/YouTube Logo.png">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.spotify.com" target="_blank">
-                            <img src="Images/Spotify Logo.png">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com" target="_blank">
-                            <img src="Images/Facebook Logo.png">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </footer>-->
+    </tr> 
+</table> 
 </body>
 
 </html>
