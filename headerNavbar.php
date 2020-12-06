@@ -1,3 +1,5 @@
+<!-- header bar used for entire site -->
+
 <header class="main-header">
     <nav class="navbar navbar-expand-lg main-nav nav">
         <ul class="navbar-nav">
@@ -7,31 +9,35 @@
             <li class="nav-item">
                 <a class="nav-link" href="project_browse.php">Shop</a>
             </li>
+            
             <?php
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-            if (isset($_SESSION["privilege"]) && isset($_SESSION["userName"]) && isset($_SESSION["isMember"])) {
-                echo ' <li class="nav-item">
-                            <a class="nav-link" href="#">User</a>
-                        </li>';
-                echo '<button class="btn btn-warning" type="button" id="logoutbut">Logout</button>';
-            }
-            else {
-                echo '<li class="nav-item">
+                // if user is logged in, logout button available. else, login and register buttons available 
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+                if (isset($_SESSION["privilege"]) && isset($_SESSION["userName"]) && isset($_SESSION["isMember"])) {
+                    echo ' <li class="nav-item">
+                                <a class="nav-link" href="#">User</a>
+                            </li>';
+                    echo '<button class="btn btn-warning" type="button" id="logoutbut">Logout</button>';
+                }
+                else {
+                    echo '<li class="nav-item">
                             <a class="nav-link" href="login.php">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="register.php">Register</a>
                         </li>';
-            }
+                }
             ?>
-            
         </ul>
     </nav>
-    <h1 class="shop-name shop-name-large">Cookie Passion</h1>
+
+    <h1 class="shop-name shop-name-large">Cookie Passion</h1> <!-- cookie shop name -->
 </header>
+
 <script>
+
     $(document).ready(function () {
         $('#logoutbut').click(function() {
             $.post("lib/checkUser.php",
