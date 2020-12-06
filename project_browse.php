@@ -190,6 +190,7 @@
             if (isset($_SESSION["privilege"]) && isset($_SESSION["userName"]) && isset($_SESSION["isMember"])) {
                 if($_SESSION["isMember"]) {
                     echo '<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>';
+                    echo '<script type="text/javascript">',"document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)",'</script>';
                 }
             }
             ?>

@@ -4,6 +4,7 @@
 DEFINE('DB_USER', 'root');
 DEFINE('DB_PASSWORD', '');
 DEFINE('DSN', 'mysql:host=localhost;dbname=cookiepassion');
+$page = 1;
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
