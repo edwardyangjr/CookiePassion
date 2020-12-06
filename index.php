@@ -118,12 +118,12 @@
             <!-- Section Content-->
             <div class="row">
                 <div class="col-lg-4 ml-auto">
-                    <p class="lead">Established in 1925, Cookie Passion's vision is to always provide the most delicious
+                    <p class="lead text-white">Established in 1925, Cookie Passion's vision is to always provide the most delicious
                         and natural cookies. We continually challenge ourselves to develop and improve our classic
                         recipes as our brand name.</p>
                 </div>
                 <div class="col-lg-4 mr-auto">
-                    <p class="lead">Our first store opened in Dallas, TX and cemented our place within the food
+                    <p class="lead text-white">Our first store opened in Dallas, TX and cemented our place within the food
                         industry, with the recent expansion to a second location in Frisco, TX.</p>
                 </div>
             </div>
@@ -131,14 +131,13 @@
     </section>
 
     <!-- Footer-->
-    <!-- TODO: Edit text to center -->
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
                 <!-- Footer Location-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Locations</h4>
-                    <p class="lead mb-0">
+                <div class="col-lg mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4 text-white">Locations</h4>
+                    <p class="lead mb-0 text-white">
                         99 John Doe Drive
                         <br />
                         Dallas, TX 12345
