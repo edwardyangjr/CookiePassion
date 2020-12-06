@@ -75,6 +75,25 @@
         $('#avalibility').html("please enter Password.");
         return;
       }
+      if (!validateEmail(email)){
+        $('#avalibility').html("You have entered an invalid email address! should include e.g.xxx@xxxx.xxx ");
+        return;
+      }
+      
+      if (password.trim().length < 5){
+        $('#avalibility').html("Password length at least 6 characters.");
+        return;
+      }
+
+      if (!password.match(/[A-Z]/)) {
+        $('#avalibility').html("Password should at least one Capital letter.");
+        return;
+      }
+
+      function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      }
 
       // check availabilty of unique username
       $.ajax({

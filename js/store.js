@@ -6,7 +6,7 @@ if (document.readyState == 'loading') {
 
 function ready() {
     
-    if($.cookie('token') !== null && $.cookie('token') !== "")
+    if($.cookie('cartStored') !== null && $.cookie('cartStored') !== "")
     {
         var cartItemContainer = document.getElementsByClassName('cart-items')[0]
         cartItemContainer.innerHTML = $.cookie('cartStored')

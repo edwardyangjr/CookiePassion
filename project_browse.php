@@ -35,13 +35,18 @@
 
     <!-- keyword search and price range filter -->
     <form action="#" method="post">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Search and Filter</span>
+        </div>
         <?php
-            echo '<input id="search1" type="text" name="search"';
+            echo '<input id="search1" type="text" name="search" class="form-control" style="width: 50%;"';
             if (isset($_SESSION["searchTermSaved"])) {
                 echo 'value="', $_SESSION["searchTermSaved"], '"';
             }
             echo '/>';
         ?>
+        <div class="input-group-append">
         <select id="search2" name="filter_price" placeholder="price">
             <?php
                 echo '<option value=""';
@@ -73,7 +78,9 @@
             ?>
         </select>
         
-		<input type="submit" id="submit" value="Search" name="searchsubmit"> <!-- submit button -->
+		<input type="submit" id="submit" value="Search" name="searchsubmit" class="btn btn-outline-secondary"> <!-- submit button -->
+        </div>
+    </div>
 	</form>
  
     <?php
@@ -88,7 +95,7 @@
         if (isset($_GET["page"])) { 
             $page  = $_GET["page"]; 
         }
-        echo '<nav> <ul class="pagination">';
+        echo '<nav> <ul class="pagination justify-content-center">';
         echo "<li class='page-item";
         if ($page <= 1){
             echo ' disabled';
@@ -269,11 +276,11 @@
                     echo '<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>';
                 }
                 else {
-                    echo '<button class="btn btn-primary btn-purchase" type="button" disabled>PURCHASE</button>';
+                    echo '<button class="btn btn-secondary btn-purchase" type="button" disabled>PURCHASE</button>';
                 }
             }
             else {
-                echo '<button class="btn btn-primary btn-purchase" type="button" disabled>PURCHASE</button>';
+                echo '<button class="btn btn-secondary btn-purchase" type="button" disabled>PURCHASE</button>';
             }
             ?>
             
