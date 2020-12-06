@@ -1,8 +1,14 @@
+<!--
+  page for handling user registration
+-->
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- external files -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="css/loginCSS2.css">
@@ -14,34 +20,36 @@
   <?php
   include("headerNavbar.php");
   ?>
-  <h2 class="h2Login">Register</h2>
+  </br>
+  <!-- Section Heading-->
+  <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Register</h2>
+  <!-- Icon Divider-->
+  <div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+    <div class="divider-custom-line"></div>
+  </div>
 
+  <!-- registration section -->
   <form action="lib/checkUser.php" method="post">
 
     <div class="imgcontainer">
-      <!--img src="img_avatar2.png" alt="Avatar" class="avatar"-->
     </div>
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
+      <label for="uname" class="text-uppercase"><b>Username</b></label>
       <input id="uname" type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="email"><b>Email</b></label>
+      
+      <label for="email" class="text-uppercase"><b>Email</b></label>
       <input type="text" placeholder="Enter Email" name="Email" id="Email" required>
-
-      <label for="psw"><b>Password</b></label>
+      
+      <label for="psw" class="text-uppercase"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
 
       <!--button-->
       <button id="rbtn" type="button" class="buttonLogin">Create account</button>
       <div id="avalibility"></div>
-
-
-
     </div>
-
-
   </form>
 
 </body>
@@ -54,8 +62,7 @@
       var password = $('input[name="psw"]').val();
       $('#avalibility').css("color", "black");
 
-
-
+      // clean up entered text
       if (username.trim() == '') {
         $('#avalibility').html("please enter Username.");
         return;
@@ -69,7 +76,7 @@
         return;
       }
 
-
+      // check availabilty of unique username
       $.ajax({
         url: 'lib/checkUser.php',
         method: "POST",
