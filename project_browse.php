@@ -35,13 +35,42 @@
 
     <!-- keyword search and price range filter -->
     <form action="#" method="post">
-        <input id="search1" type="text" name="search" />
-        
+        <?php
+            echo '<input id="search1" type="text" name="search"';
+            if (isset($_SESSION["searchTermSaved"])) {
+                echo 'value="', $_SESSION["searchTermSaved"], '"';
+            }
+            echo '/>';
+        ?>
         <select id="search2" name="filter_price" placeholder="price">
-            <option value=""></option> <!-- default empty -->
-            <option value="1"><$1</option>
-			<option value="2">$1-$5</option>
-			<option value="3">$5</option>
+            <?php
+                echo '<option value=""';
+                if (!isset($_SESSION["filter_priceSaved"])) {
+                    echo 'selected="selected"';
+                }
+                echo '>None</option>';
+                echo '<option value="1"';
+                if (isset($_SESSION["filter_priceSaved"])) {
+                    if ($_SESSION["filter_priceSaved"] == 1) {
+                        echo 'selected="selected"';
+                    }
+                }
+                echo '><$1</option>';
+                echo '<option value="2"';
+                if (isset($_SESSION["filter_priceSaved"])) {
+                    if ($_SESSION["filter_priceSaved"] == 2) {
+                        echo 'selected="selected"';
+                    }
+                }
+                echo '>$1-$5</option>';
+                echo '<option value="3"';
+                if (isset($_SESSION["filter_priceSaved"])) {
+                    if ($_SESSION["filter_priceSaved"] == 3) {
+                        echo 'selected="selected"';
+                    }
+                }
+                echo '>$5</option>';
+            ?>
         </select>
         
 		<input type="submit" id="submit" value="Search" name="searchsubmit"> <!-- submit button -->
@@ -49,13 +78,37 @@
  
     <?php
         // display page links for product browsing 
-        echo "<- Previous ";
+        /*echo "<- Previous ";
         for ($i=1; $i<=$total_pages; $i++) {  // dynamic page links per cookie list
             echo "<a href='project_browse.php?page=".$i."'";
             if ($i == $page)  echo " class='curPage'";
             echo ">".$i."</a> "; 
         }; 
-        echo " Next ->";
+        echo " Next ->";*/
+        if (isset($_GET["page"])) { 
+            $page  = $_GET["page"]; 
+        }
+        echo '<nav> <ul class="pagination">';
+        echo "<li class='page-item";
+        if ($page <= 1){
+            echo ' disabled';
+        }
+        $tempPageVar = $page - 1;
+        echo "'><a class='page-link' href='project_browse.php?page=".$tempPageVar."'>Previous</a></li>";
+        for ($i=1; $i<=$total_pages; $i++) {  // dynamic page links per cookie list
+            echo "<li class='page-item'><a class='page-link' href='project_browse.php?page=", $i, "'>", $i;
+            if ($i == $page){
+                echo '<span class="sr-only">(current)</span>';
+            }
+            echo '</a></li>';
+        };
+        echo "<li class='page-item";
+        if ($page >= $total_pages){
+            echo ' disabled';
+        }
+        $tempPageVar = $page + 1;
+        echo "'><a class='page-link' href='project_browse.php?page=".$tempPageVar."'>Next</a></li>";
+        echo '</ul></nav>';
     ?>
 
     <!-- table: cookies and shopping cart display sections -->
@@ -99,8 +152,19 @@
                         echo "<img class='shop-item-image' src=", $cookie['imageLocation'], ">";
                         echo "<div class='shop-item-details'>";
                         echo "<span class='shop-item-price'>$", $cookie['price'], "</span>";
-                        echo "<button class='btn btn-primary shop-item-button' type='button'>ADD TO CART</button>";
+                        if($cookie['inventory'] <= 0) {
+                            echo '<button type="button" class="btn btn-secondary btn-lg" disabled>Out of Stock</button>';
+                        }
+                        else {
+                            echo "<button class='btn btn-primary shop-item-button' type='button'>ADD TO CART</button>";
+                        }
                         echo "</div>";
+                        if($cookie['inventory'] <= 0) {
+                            echo "<p>Out of Stock!!!</p>";
+                        }
+                        else {
+                            echo "<p id='", $cookie['inventory'], "' class='shop-item-inventory'>", "Only ", $cookie['inventory'], " left!!!</p>";
+                        }
                         if ($cookie['description']) {
                             echo "<p>", $cookie['description'], "</p>";
                         }
@@ -203,8 +267,13 @@
             if (isset($_SESSION["privilege"]) && isset($_SESSION["userName"]) && isset($_SESSION["isMember"])) {
                 if($_SESSION["isMember"]) {
                     echo '<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>';
-                    echo '<script type="text/javascript">',"document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)",'</script>';
                 }
+                else {
+                    echo '<button class="btn btn-primary btn-purchase" type="button" disabled>PURCHASE</button>';
+                }
+            }
+            else {
+                echo '<button class="btn btn-primary btn-purchase" type="button" disabled>PURCHASE</button>';
             }
             ?>
             

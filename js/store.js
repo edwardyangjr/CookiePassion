@@ -28,7 +28,7 @@ function ready() {
         var button = addToCartButtons[i]
         button.addEventListener('click', addToCartClicked)
     }
-    if(!document.getElementsByClassName('btn-purchase')) {
+    if(document.getElementsByClassName('btn-purchase')) {
         document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
     }
 }
@@ -64,6 +64,7 @@ function purchaseClicked() {
         cartItems.removeChild(cartItems.firstChild)
     }
     updateCartTotal()
+    location.reload();
 }
 
 function removeCartItem(event) {
@@ -81,17 +82,21 @@ function quantityChanged(event) {
 }
 
 function addToCartClicked(event) {
+    if(document.getElementsByClassName('btn-purchase')) {
+        document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+    }
     var button = event.target
     var shopItem = button.parentElement.parentElement
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
     var cookieId = shopItem.getElementsByClassName('shop-item-title')[0].id
     var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
     var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
-    addItemToCart(title, price, imageSrc, cookieId)
+    var limit = shopItem.getElementsByClassName('shop-item-inventory')[0].id
+    addItemToCart(title, price, imageSrc, cookieId, limit)
     updateCartTotal()
 }
 
-function addItemToCart(title, price, imageSrc, cookieId) {
+function addItemToCart(title, price, imageSrc, cookieId, limit) {
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]
@@ -109,7 +114,7 @@ function addItemToCart(title, price, imageSrc, cookieId) {
         </div>
         <span class="cart-price cart-column">${price}</span>
         <div class="cart-quantity cart-column">
-            <input class="cart-quantity-input" type="number" value="1">
+            <input class="cart-quantity-input" type="number" value="1" min="1" max="${limit}">
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
     cartRow.innerHTML = cartRowContents

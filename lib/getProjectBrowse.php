@@ -4,7 +4,13 @@
 DEFINE('DB_USER', 'root');
 DEFINE('DB_PASSWORD', '');
 DEFINE('DSN', 'mysql:host=localhost;dbname=cookiepassion');
-$page = 1;
+if (isset($_GET["page"])) { 
+    $page  = $_GET["page"]; 
+}
+else {
+    $page = 1;
+    $_GET["page"] = 1;
+}
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -26,12 +32,18 @@ function getCookieCount() {
     if (isset($_POST["search"])) { // check for null value for search keyword
         $data1=$_POST["search"];
     }
+    else if(isset($_SESSION["searchTermSaved"])) {
+        $data1=$_SESSION["searchTermSaved"];
+    }
 	else {
         $data1='';
     }
 
     if (isset($_POST['filter_price'])) { // check for null value in price range filter
         $data2=$_POST['filter_price'];
+    }
+    else if(isset($_SESSION["filter_priceSaved"])) {
+        $data2=$_SESSION["filter_priceSaved"];
     }
     else {
         $data2='';
@@ -41,7 +53,7 @@ function getCookieCount() {
     $query = "select * from cookie 
         where (name like '%$data1%' or description like '%$data1%') 
         and del = 1 
-        and inventory > 0";
+        and inventory >= 0";
  
     // display options based on search and filter selection        
     if ($data2== '1') { // cookies <$1 selected
@@ -49,19 +61,19 @@ function getCookieCount() {
             where (name like '%$data1%' or description like '%$data1%') 
             and del = 1 
             and price < 1 
-            and inventory > 0 ";
+            and inventory >= 0 ";
     } else if ($data2== '2') { // cookies $1-5 selected
         $query = "select * from cookie 
             where (name like '%$data1%' or description like '%$data1%') 
                 and del = 1 
                 and price >= 1 and price < 5 
-                and inventory > 0";
+                and inventory >= 0";
     } else if ($data2=='3') { // cookies >$5 selected
         $query="select * from cookie 
             where (name like '%$data1%' or description like '%$data1%') 
                 and del = 1 
                 and price >= 5 
-                and inventory > 0";
+                and inventory >= 0";
     }
 
     // run query 
@@ -86,19 +98,6 @@ function getAllCookie() { // get cookie info for display
     }
 
     // search and filter handles
-    if (isset($_POST["search"])) { // check for null value for search keyword
-        $data1=$_POST["search"];
-    }
-	else {
-        $data1='';
-    }
-
-    if (isset($_POST['filter_price'])) { // check for null value in price range filter
-        $data2=$_POST['filter_price'];
-    }
-    else {
-        $data2='';
-    }
 
     // page var from project_browse php, which determines what results are returned 
     if (isset($_GET["page"])) { 
@@ -106,8 +105,35 @@ function getAllCookie() { // get cookie info for display
     } 
     else { 
         $page = 1; // default on page 1
+        $_GET["page"] = 1;
     }
     
+    if (isset($_POST["search"])) { // check for null value for search keyword
+        $data1=$_POST["search"];
+        $page = 1; // default on page 1
+        $_GET["page"] = 1;
+        $_SESSION["searchTermSaved"] = $data1;
+    }
+    else if(isset($_SESSION["searchTermSaved"])) {
+        $data1=$_SESSION["searchTermSaved"];
+    }
+	else {
+        $data1='';
+    }
+
+    if (isset($_POST['filter_price'])) { // check for null value in price range filter
+        $data2=$_POST['filter_price'];
+        $page = 1; // default on page 1
+        $_GET["page"] = 1;
+        $_SESSION["filter_priceSaved"] = $data2;
+    }
+    else if(isset($_SESSION["filter_priceSaved"])) {
+        $data2=$_SESSION["filter_priceSaved"];
+    }
+    else {
+        $data2='';
+    }
+
     $results_per_page = 5; // number of results per page
     $start_from = ($page-1) * $results_per_page;
 
@@ -115,7 +141,7 @@ function getAllCookie() { // get cookie info for display
     $query = "select * from cookie 
         where (name like '%$data1%' or description like '%$data1%') 
         and del = 1 
-        and inventory > 0
+        and inventory >= 0
         order by name asc limit $start_from, ".$results_per_page;
  
     // display options based on search and filter selection        
@@ -124,7 +150,7 @@ function getAllCookie() { // get cookie info for display
             where (name like '%$data1%' or description like '%$data1%') 
             and del = 1 
             and price < 1 
-            and inventory > 0 
+            and inventory >= 0 
             order by name asc
             limit $start_from, ".$results_per_page;
     } else if ($data2== '2') { // cookies $1-5 selected
@@ -132,7 +158,7 @@ function getAllCookie() { // get cookie info for display
             where (name like '%$data1%' or description like '%$data1%') 
                 and del = 1 
                 and price >= 1 and price < 5 
-                and inventory > 0
+                and inventory >= 0
                 order by name asc
                 limit $start_from, ".$results_per_page;
     } else if ($data2=='3') { // cookies >$5 selected
@@ -140,7 +166,7 @@ function getAllCookie() { // get cookie info for display
             where (name like '%$data1%' or description like '%$data1%') 
                 and del = 1 
                 and price >= 5 
-                and inventory > 0
+                and inventory >= 0
                 order by name asc
                 limit $start_from, ".$results_per_page;
     }
@@ -205,6 +231,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $query = 'INSERT INTO orderdetail (orderid, cookieID, amount) VALUES (:orderid, :cookieID, :amount);';
                 $statement = $db->prepare($query);
                 $statement->bindValue(':orderid', $lastID[0]);
+                $statement->bindValue(':cookieID', $cookie["cookieID"]);
+                $statement->bindValue(':amount', $cookie['amount']);
+                $statement->execute();
+
+                $query = "UPDATE cookie SET inventory = inventory - :amount WHERE id = :cookieID";
+                $statement = $db->prepare($query);
                 $statement->bindValue(':cookieID', $cookie["cookieID"]);
                 $statement->bindValue(':amount', $cookie['amount']);
                 $statement->execute();
