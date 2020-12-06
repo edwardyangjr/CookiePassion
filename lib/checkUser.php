@@ -112,6 +112,13 @@ function setUser($isUser, $name, $privilege) {
 	}
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_POST['action'])) {
+		if ($_POST['action'] == "logout"){
+			session_destroy();
+		}
+	}
+}
 
 
 ?>

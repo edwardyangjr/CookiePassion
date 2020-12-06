@@ -12,7 +12,7 @@
 
 <body>
   <?php
-  include("headerNavbar.html");
+  include("headerNavbar.php");
   ?>
   <h2 class="h2Login">Register</h2>
 

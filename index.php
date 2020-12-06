@@ -26,7 +26,7 @@
 <body id="page-top">
     <!-- navigation-->
     <?php
-    include("headerNavbar.html");
+    include("headerNavbar.php");
     ?>
     <!-- Why Different Section-->
     <section class="page-section panel" id="panel">

@@ -24,7 +24,7 @@ $cookieList = getAllCookie();
 
 <body>
     <?php
-    include("headerNavbar.html");
+    include("headerNavbar.php");
     ?>
 
     <!-- keyword search and price range filter -->

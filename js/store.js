@@ -5,9 +5,12 @@ if (document.readyState == 'loading') {
 }
 
 function ready() {
-
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    cartItemContainer.innerHTML = $.cookie('cartStored')
+    
+    if($.cookie('token') !== null && $.cookie('token') !== "")
+    {
+        var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+        cartItemContainer.innerHTML = $.cookie('cartStored')
+    }
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (var i = 0; i < removeCartItemButtons.length; i++) {
         var button = removeCartItemButtons[i]
@@ -25,8 +28,9 @@ function ready() {
         var button = addToCartButtons[i]
         button.addEventListener('click', addToCartClicked)
     }
-
-    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+    if(!document.getElementsByClassName('btn-purchase')) {
+        document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+    }
 }
 
 function purchaseClicked() {
