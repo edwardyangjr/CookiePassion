@@ -92,19 +92,11 @@ body {
 }
 
 .section-header {
-    font-family: "Verdana";
+    font-family: "Booter - Zero Zero";
     font-weight: normal;
     color: #333;
     text-align: center;
     font-size: 2.5em;
-}
-
-.about-band-image {
-    float: left;
-    height: 200px;
-    width: 200px;
-    margin: 15px;
-    border-radius: 50%;
 }
 
 .main-footer {
@@ -177,39 +169,6 @@ body {
 
 .btn-primary:hover {
     background-color: #2D9CDB;
-}
-
-.tour-row {
-    border-bottom: 1px solid black;
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-}
-
-.tour-row:last-child {
-    border: none;
-}
-
-.tour-item {
-    display: inline-block;
-    padding-right: .5em;
-}
-
-.tour-date {
-    color: #555;
-    width: 11%;
-    font-weight: bold;
-}
-
-.tour-city {
-    width: 24%;
-}
-
-.tour-arena {
-    width: 42%;
-}
-
-.tour-btn {
-    max-width: 19%;
 }
 
 .shop-item {
@@ -291,18 +250,6 @@ body {
     width: 75px;
     height: auto;
     border-radius: 10px;
-}
-
-.btn-danger {
-    color: white;
-    background-color: #EB5757;
-    border: none;
-    border-radius: .3em;
-    font-weight: bold;
-}
-
-.btn-danger:hover {
-    background-color: #CC4C4C;
 }
 
 .cart-quantity-input {
