@@ -62,7 +62,14 @@
     <table> 
         <tr> 
         <td class="container browse-section">  <!-- left column: cookies display -->
-            <h2 class="section-header">COOKIES</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" >COOKIES</h2>
+                
+            <!-- Icon Divider -->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
             <br />
             <?php
                 if (isset($_SESSION["privilege"])) {
@@ -173,7 +180,13 @@
 
         <!-- right columns: responsive cart with js -->
         <td  class="container cart-section">
-            <h2 class="section-header">CART</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" >CART</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
             <div class="cart-row">
                 <span class="cart-item cart-header cart-column">ITEM</span>
                 <span class="cart-price cart-header cart-column">PRICE</span>
