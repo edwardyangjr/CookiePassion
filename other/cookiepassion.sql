@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2020 at 06:17 AM
+-- Generation Time: Dec 06, 2020 at 11:46 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -43,21 +43,21 @@ CREATE TABLE `cookie` (
 --
 
 INSERT INTO `cookie` (`id`, `name`, `description`, `price`, `inventory`, `ingredients`, `imageLocation`, `del`) VALUES
-(1, 'Biscuit', 'Good', '1.61', 51, 'coco', 'images/cookies/cookieNewUpload.png', 1),
-(2, 'Caramel Chocolate Pecan Cookie', NULL, '1.99', 0, NULL, 'images/cookies/CaramelChocolatePecanCookie.png', 1),
-(3, 'Chocolate Chip / Peanut Butter', NULL, '1.59', 100, NULL, 'images/cookies/chocolate_chip_peanut_butter_cookie.png', 1),
+(1, 'Biscuit', 'Good', '1.61', 0, 'coco', 'images/cookies/cookieNewUpload.png', 1),
+(2, 'Caramel Chocolate Pecan Cookie', 'A cookie with caramel bits and chopped pecans for a decadent, chewy delight!', '1.99', 0, 'Caramel, Pecan', 'images/cookies/CaramelChocolatePecanCookie.png', 1),
+(3, 'Chocolate Chip / Peanut Butter', 'Big, thick, chewy, and soft cookie loaded with peanut butter and chocolate flavor.', '1.59', 100, 'Chocolate, Peanut Butter.', 'images/cookies/chocolate_chip_peanut_butter_cookie.png', 1),
 (4, 'Chocolate Chip Cookie', 'Signature chocolate chip.', '1.50', 100, 'Chocolate', 'images/cookies/floating_chocolate_chip_cookies.png', 1),
-(5, 'Chocolate Chocolate Chip', NULL, '1.80', 100, NULL, 'images/cookies/ChocolateChocolateChip.png', 1),
-(6, 'Cookies N Cream', 'Made with Oreo.', '2.60', 100, 'Cream', 'images/cookies/CookiesNCream.png', 1),
-(7, 'Iced Sugar Cookie', 'Normal sugar cookie.', '1.20', 100, NULL, 'images/cookies/IcedSugarCookie.png', 1),
-(8, 'Jam Cookie', NULL, '2.10', 100, NULL, 'images/cookies/CaramelApple.png', 1),
-(9, 'Jelly Cookie', NULL, '3.30', 100, NULL, 'images/cookies/Jelly.png', 1),
-(10, 'Kisses Cookie', NULL, '5.50', 100, NULL, 'images/cookies/KissesCookie.png', 1),
-(11, 'Matcha Green Tea', NULL, '2.50', 100, NULL, 'images/cookies/MatchaGreenTea.png', 1),
-(12, 'Oatmeal Raisin', NULL, '1.79', 100, NULL, 'images/cookies/OatmealRaisin.png', 1),
-(13, 'Red Velvet Cookie', NULL, '3.50', 100, NULL, 'images/cookies/RedVelvet.png', 1),
-(14, 'Smores Cookie', NULL, '4.50', 100, NULL, 'images/cookies/Smores.png', 1),
-(15, 'Sugar Cookie', NULL, '0.99', 100, NULL, 'images/cookies/SugarCookie.png', 1),
+(5, 'Chocolate Chocolate Chip', 'Double the  chocolate, double the flavor.', '1.80', 100, 'Chocolate', 'images/cookies/ChocolateChocolateChip.png', 1),
+(6, 'Cookies N Cream', 'Classic Oreo with the best cookie.', '2.60', 99, 'Cream, Oreo', 'images/cookies/CookiesNCream.png', 1),
+(7, 'Iced Sugar Cookie', 'Simple, but the best in the world.', '1.20', 100, 'Sprinkles, Icing', 'images/cookies/IcedSugarCookie.png', 1),
+(8, 'Jam Cookie', 'Where apple jam meets cookie.', '2.10', 99, 'Apple Jam ', 'images/cookies/CaramelApple.png', 1),
+(9, 'Jelly Cookie', 'Where jelly meets with cookie.', '3.30', 100, 'Jelly', 'images/cookies/Jelly.png', 1),
+(10, 'Kisses Cookie', 'The best chocolate meet with the best cookie.', '5.50', 98, 'Kisses', 'images/cookies/KissesCookie.png', 1),
+(11, 'Matcha Green Tea', 'Our new take on a traditional cookie. Infused with tea flavor.', '2.50', 100, 'Matcha', 'images/cookies/MatchaGreenTea.png', 1),
+(12, 'Oatmeal Raisin', 'For people looking for a healthier option.', '1.79', 100, 'Oatmeal, Raisin', 'images/cookies/OatmealRaisin.png', 1),
+(13, 'Red Velvet Cookie', 'When a traditional cake flavor combine with the best cookie.', '3.50', 100, 'Red Velvet', 'images/cookies/RedVelvet.png', 1),
+(14, 'Smores Cookie', 'Bringing camping and cookie together.', '4.50', 100, 'marshmallows', 'images/cookies/Smores.png', 1),
+(15, 'Sugar Cookie', 'Simple, but the best in the world.', '0.99', 100, 'Sugar', 'images/cookies/SugarCookie.png', 1),
 (18, 'New Cookie', 'none', '8.00', 15, 'coco', '', 0),
 (19, 'cookiesadasd', '', '50.00', 20, '', '', 0),
 (20, 'Test', 'test', '5.00', 100, 'idk', '', 0);
@@ -89,7 +89,17 @@ INSERT INTO `orderdetail` (`id`, `orderId`, `cookieID`, `amount`, `del`) VALUES
 (14, 17, 13, 5, 1),
 (15, 17, 15, 1, 1),
 (16, 18, 3, 1, 1),
-(17, 18, 4, 1, 1);
+(17, 18, 4, 1, 1),
+(18, 19, 2, 1, 1),
+(19, 21, 1, 1, 1),
+(20, 21, 3, 1, 1),
+(21, 21, 5, 1, 1),
+(22, 22, 1, 1, 1),
+(23, 23, 1, 6, 1),
+(24, 24, 6, 1, 1),
+(25, 25, 1, 44, 1),
+(26, 26, 8, 1, 1),
+(27, 27, 10, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +147,16 @@ CREATE TABLE `userorder` (
 INSERT INTO `userorder` (`username`, `orderId`, `total`, `orderTime`, `del`) VALUES
 ('admin', 16, '11.71', '2020-12-05 03:05:04', 1),
 ('admin', 17, '32.78', '2020-12-05 04:44:19', 1),
-('admin', 18, '3.09', '2020-12-05 05:14:10', 1);
+('admin', 18, '3.09', '2020-12-05 05:14:10', 1),
+('admin', 19, '1.99', '2020-12-05 22:19:45', 1),
+('admin', 20, '0', '2020-12-05 22:25:26', 1),
+('admin', 21, '5', '2020-12-06 03:49:18', 1),
+('admin', 22, '1.61', '2020-12-06 10:08:09', 1),
+('admin', 23, '9.66', '2020-12-06 10:09:01', 1),
+('admin', 24, '2.6', '2020-12-06 10:33:25', 1),
+('admin', 25, '70.84', '2020-12-06 10:40:38', 1),
+('admin', 26, '2.1', '2020-12-06 22:44:47', 1),
+('user', 27, '11', '2020-12-06 22:45:40', 1);
 
 --
 -- Indexes for dumped tables
@@ -184,13 +203,13 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `userorder`
 --
 ALTER TABLE `userorder`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
