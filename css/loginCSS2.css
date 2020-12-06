@@ -1,16 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
+@import url("https://fonts.googleapis.com/css?family=Metal+Mania");
 
+@font-face {
+    font-family: "Booter - Zero Zero";
+    src: url("Fonts/Booter - Zero Zero.woff") format("woff"),
+        url("Fonts/Booter - Zero Zero.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
 
-
-/*body {
-
-	font-family: Arial, Helvetica, 
-	sans-serif;
- 	font-size: 35px; 
- 	padding-top: 20px; 
- 	background: url(images/coffee-chocolate-cookies.jpg);
-	background-size: cover;
- }*/
-/*form {border: 1px solid #f1f1f1;}*/
+* {
+  box-sizing: border-box;
+  font-family: Raleway;
+  color: #777;
+}
 
 .h2Login{
   color: red;
@@ -29,16 +32,7 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-/*
-#A{
- 
-	 width: 50%;
-}
-#B{
-	 width: 50%;
 
-}
-*/
 .buttonLogin {
   background-color: orange;
   color: white;
@@ -50,7 +44,7 @@ input[type=text], input[type=password] {
 }
 
 button:hover {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .cancelbtn {
