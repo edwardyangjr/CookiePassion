@@ -17,7 +17,7 @@
                 }
                 if (isset($_SESSION["privilege"]) && isset($_SESSION["userName"]) && isset($_SESSION["isMember"])) {
                     echo ' <li class="nav-item">
-                                <a class="nav-link" href="#">User</a>
+                                <a class="nav-link" href="getOrderlist.php">User</a>
                             </li>';
                     echo '<button class="btn btn-warning" type="button" id="logoutbut">Logout</button>';
                 }
@@ -46,7 +46,7 @@
             },
             function (data, status) {
                 alert("Logout:" + status);
-                location.reload();
+                window.location.href = "index.php";
             });
         })
     });
