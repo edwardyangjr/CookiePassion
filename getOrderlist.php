@@ -1,5 +1,5 @@
 <?php
-
+$_SESSION["isMember"] = true;
 //".$_SESSION['uname']."
 //$name = $_POST['uname'];
 $name= "admin" ;
@@ -18,13 +18,18 @@ if (!$conn) {
 //else{ echo "connect success"; }
 
 
-$u_orderId ="SELECT orderId from userorder where username='".$name."'";    
-$t_orderId ="SELECT total from userorder where username='".$name."'";    
 
-$d_orderId ="SELECT * FROM `orderdetail` WHERE orderId IN (".$u_orderId.")"; 
+// here change last line "$name" to SESSION[username]
+$all="SELECT userorder.orderId,userorder.total,userorder.orderTime, orderdetail.cookieID, cookie.name, cookie.description, cookie.price, cookie.imageLocation FROM userorder INNER JOIN orderdetail ON userorder.orderId = orderdetail.orderId INNER JOIN cookie ON orderdetail.cookieID = cookie.cookieID WHERE userorder.username='".$name."' 
+";     
 
-$d_result = mysqli_query($conn, $d_orderId);
-$t_result = mysqli_query($conn, $t_orderId);
+
+$u_orderId ="SELECT * from userorder where username='".$name."'";    
+  
+$uo_result = mysqli_query($conn, $all);
+
+$o_result = mysqli_query($conn, $u_orderId);
+
 
 ?>
 
@@ -45,18 +50,20 @@ $t_result = mysqli_query($conn, $t_orderId);
 <style type="text/css">
 
 img {
-  max-width: 250px;
+  
+  padding-left: 60px;
+  max-width: 300px;
   height: 180px;
 }
-p1,p2,h4,h3{
-
-  position: relative;
-  left: 50px;
-}
-h3,h4,p2{
-    font-weight: bold;
+p1,p2{
+  font-size: 30px;
+  padding-left: 50px;
 }
 h3,h4{
+    font-weight: bold;
+}
+h2,h3,h4{
+  padding-left: 50px;
   color: black;
 }
 
@@ -75,69 +82,88 @@ h3,h4{
 
 <?php
 
-$num = mysqli_num_rows($d_result);
-
-//$row = mysqli_fetch_array($d_result,MYSQLI_ASSOC);
 
 
-while($row = mysqli_fetch_array($d_result,MYSQLI_ASSOC)){
- 
-  $orderId_detail[]=$row['orderId'];
-  $order_amount[]=$row['amount'];
- 
+while($row0 = mysqli_fetch_array($o_result,MYSQLI_ASSOC)){
+
+  $order_id_1[]=$row0['orderId'];
+  $order_total_1[]=$row0['total'];
+  $order_time_1[]=$row0['orderTime'];
+
 }
+
+
+
+while($row = mysqli_fetch_array($uo_result,MYSQLI_ASSOC)){
+
+  $order_id[]=$row['orderId'];
+  $order_total[]=$row['total'];
+  $order_time[]=$row['orderTime'];
+  $order_cookieID[]=$row['cookieID'];
+  $order_name[]=$row['name'];
+  $order_price[]=$row['price'];
+  $order_img[]=$row['imageLocation'];
+
+
+}
+//-*--------------**-----------*------------*------
+
+
+$num_t = mysqli_num_rows($uo_result);
+$num_i = mysqli_num_rows($o_result);
+
+/*
+$order_id=array_unique($order_id);
+$order_total=array_unique($order_total);
+$order_time=array_unique($order_time);
+*/
+
+
+//print_r();
+$currentIndex = 0;
+
+for ($i=0; $i < $num_i; $i++) {   
+  # code..
+
+  echo "<h2> order number: ".$order_id_1[$i]."</h2>";
+  echo "<h2> total price:    ".$order_total_1[$i]."</h2>";
+  
+  echo "<br>-----------</br>";
+
+while ($currentIndex < $num_t) { 
+ 
+if($order_id_1[$i]==$order_id[$currentIndex]){
+
+
+  echo "<img class='o_img' src=". $order_img[$currentIndex]." >";
+  echo "<p1>".$order_id[$currentIndex]."</p1>";
+  echo "<p1>".$order_cookieID[$currentIndex]."</p1>";
+  echo "<p1>". $order_name[$currentIndex]."</p1>";
+  echo "<p1>". $order_price[$currentIndex]."</p1>";
+  echo "<p1>".$order_time[$currentIndex]."</p1>";
+  echo "<div></div>";
+  $currentIndex++;
+
+  } 
+
+
+
+ }
+
+
+ $currentIndex=0;
+
+
+}
+
+
+
+
 
 ?>
 
-<DIV>
-
-<?php 
-
-//SELECT * FROM `cookie` WHERE id in (4, 6, 11, 12, 13, 15, 3)
-$uni_orderid = array_unique($orderId_detail);
-
-// uni_orderid = arr(16,17,18 )
-
-foreach ($uni_orderid as $uid) {
-  
-  echo "<br><h4>User OrderID: " .$uid. "</h4>"; 
-  
-    $s_oid_result="SELECT cookieID FROM orderdetail WHERE orderId= '".$uid."' ";
-
-    $oid_result = mysqli_query($conn, $s_oid_result);
-
-    while($row = mysqli_fetch_array($oid_result,MYSQLI_ASSOC)){
-
-      $cookieId_orderdetail[]=$row['cookieID'];
-   
-  }
 
 
-    //echo "Here is cookieID: "."<br> "; 
-    foreach ($cookieId_orderdetail as $cid) {
-      
-      //echo "<p1>here is cookieid in orderdetail: ".$cid. "</p1><br>"." "; 
-      
-      $c_sql= "SELECT * from cookie where id= '".$cid."' ";
-      $c_result = mysqli_query($conn, $c_sql);
-      $cookieId_orderdetail=null;
-      while($row = mysqli_fetch_array($c_result,MYSQLI_ASSOC)){
-
-       
-        echo "<div><img class='o_img' src=". $row['imageLocation']." ></div>";
-        echo "<p1>".$row['id']."</p1><br> ";
-        echo "<p2>".$row['name']."</p2><br> ";
-        //echo "<p1>".$row['ingredient']."</p1><br> ";
-        echo "<p1>".$row['description']."</p1><br> ";   
-        echo "<p1>".$row['price']."</p1><br>";
-        echo "<div></p1></div>";
-        
-      }
-    }
-}
-
-?>
-</DIV>
 </body>
 </html>
 
