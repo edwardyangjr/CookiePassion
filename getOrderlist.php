@@ -21,11 +21,8 @@ if (!$conn) {
 }
 //else{ echo "connect success"; }
 
-
-
 // here change last line "$name" to SESSION[username]
-$all="SELECT orderdetail.amount,userorder.orderId,userorder.total,userorder.orderTime, orderdetail.id, cookie.name, cookie.description, cookie.price, cookie.imageLocation FROM userorder INNER JOIN orderdetail ON userorder.orderId = orderdetail.orderId INNER JOIN cookie ON orderdetail.cookieID = cookie.id WHERE userorder.username='".$name."' 
-";     
+$all="SELECT userorder.orderTime, orderdetail.amount,userorder.orderId,userorder.total, orderdetail.id, cookie.name, cookie.description, cookie.price, cookie.imageLocation FROM userorder INNER JOIN orderdetail ON userorder.orderId = orderdetail.orderId INNER JOIN cookie ON orderdetail.cookieID = cookie.id WHERE userorder.username='".$name."'";     
 
 
 $u_orderId ="SELECT * from userorder where username='".$name."'";    
@@ -100,14 +97,6 @@ $orderDet = array();
 
 while($row = mysqli_fetch_array($uo_result,MYSQLI_ASSOC)){
 
-  /*$order_id[]=$row['orderId'];
-  $order_total[]=$row['total'];
-  $order_time[]=$row['orderTime'];
-  $order_cookieID[]=$row['id'];
-  $order_name[]=$row['name'];
-  $order_price[]=$row['price'];
-  $order_img[]=$row['imageLocation'];*/
-
   if (!array_key_exists($row['orderId'], $orderDet)) {
     $orderDet[$row['orderId']] = array();
   }
@@ -127,38 +116,17 @@ while($row = mysqli_fetch_array($uo_result,MYSQLI_ASSOC)){
 $num_t = mysqli_num_rows($uo_result);
 $num_i = mysqli_num_rows($o_result);
 
-/*
-$order_id=array_unique($order_id);
-$order_total=array_unique($order_total);
-$order_time=array_unique($order_time);
-*/
-
-
 //print_r();
 $currentIndex = 0;
 
-for ($i=0; $i < $num_i; $i++) {   
+for ($i=$num_i-1; 0 <= $i; $i--) {   
   # code..
 
   echo "<h1> Order Number: ".$order_id_1[$i].", Total Price: $".$order_total_1[$i].", Order Date: ".$order_time_1[$i]."</h1>";
   //echo "<h1> Total Price:    ".$order_total_1[$i]."</h1>";
   
   echo "<hr/>";
-  /*
-  while ($currentIndex < $num_t) { 
-    if($order_id_1[$i]==$order_id[$currentIndex]){
-      echo "<img class='o_img' src=". $order_img[$currentIndex]." >";
-      echo "<p1>".$order_id[$currentIndex]."</p1>";
-      echo "<p1>".$order_cookieID[$currentIndex]."</p1>";
-      echo "<p1>". $order_name[$currentIndex]."</p1>";
-      echo "<p1>". $order_price[$currentIndex]."</p1>";
-      echo "<p1>".$order_time[$currentIndex]."</p1>";
-      echo "<div></div>";
-      $currentIndex++;
-    } 
-  }
-  $currentIndex=0;
-  */
+
   foreach ($orderDet[$order_id_1[$i]] as $arrRow) {
     echo "<img class='o_img' src=". $arrRow['imageLocation']." >";
     echo "<p1>Name: ". $arrRow['name']."</p1>";
